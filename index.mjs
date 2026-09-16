@@ -46,11 +46,10 @@ function parseSkill(markdown) {
   return { fields, content: markdown.slice(match[0].length).trim() }
 }
 
-let cached
-
 async function loadSkill() {
-  if (cached === undefined) cached = parseSkill(await readFile(SKILL_URL, 'utf8'))
-  return cached
+  // 每次都重新读盘。目录会在每个请求边界刷新，缓存会让 SKILL.md 的编辑
+  // 在插件重载前一直不生效，测试时很费解。
+  return parseSkill(await readFile(SKILL_URL, 'utf8'))
 }
 
 function summary(fields) {
