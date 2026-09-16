@@ -1,0 +1,26 @@
+{
+  "name": "dsh-rag-evaluate-plugin",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "index.mjs",
+  "bin": {
+    "dsh-rag-evaluate": "./launcher.mjs"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "files": [
+    "index.mjs",
+    "launcher.mjs",
+    "cordis.patch.yml",
+    "python",
+    "skills"
+  ],
+  "exports": {
+    ".": "./index.mjs",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  }
+}

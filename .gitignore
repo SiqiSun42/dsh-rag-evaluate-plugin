@@ -1,0 +1,12 @@
+# Python 运行环境由 launcher.mjs 自举，不入库
+.venv/
+
+# Python 编译产物
+__pycache__/
+*.py[cod]
+
+# 评测产物（写入用户工作区，正常情况下不会出现在插件目录）
+evaluation/
+
+# 常见命令行笔记
+CLI.md

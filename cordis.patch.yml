@@ -1,0 +1,20 @@
+- insert:
+    - id: python-rag-evaluate-mcp
+      name: '@deepseek-ai/dsh-mcp-client'
+      config:
+        serverName: rag-evaluate
+        transport: stdio
+        command: !!js process.execPath
+        args:
+          - !!js decodeURIComponent(new URL("node_modules/dsh-rag-evaluate-plugin/launcher.mjs", baseUrl).pathname)
+        toolCallTimeoutMs: 30000
+        failOnStartupError: false
+
+    # 把本插件自带的 skill 注册进 skill 注册表。该行名解析到本包的 index.mjs。
+    #
+    # 不能用覆盖 skill-filesystem 的 customSkillDirs 来实现：web profile 禁用了
+    # host 层那一行（原文注释 presets own local discovery），真正生效的是 agent
+    # preset 挂载的、不带配置的另一行，而 profile 的 patch 层够不到 preset 组合。
+    # 部署级插件直接向注册表注册提供方，则不受该分层影响。
+    - id: rag-evaluate-skills
+      name: 'dsh-rag-evaluate-plugin'
