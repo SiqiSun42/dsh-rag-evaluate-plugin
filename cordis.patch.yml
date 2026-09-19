@@ -1,4 +1,8 @@
 - insert:
+    # MCP 服务当前不注册任何工具，保留作为备用。
+    # 注意：它和下面的 skill 注册是并列关系，不是依赖关系——skill 由 index.mjs
+    # 注册，不经过 MCP。若要拆掉这一行，需同时删掉 launcher.mjs 与 requirements.txt，
+    # 否则 patch 会引用到不存在的文件，导致整个插件加载失败。
     - id: python-rag-evaluate-mcp
       name: '@deepseek-ai/dsh-mcp-client'
       config:
@@ -7,7 +11,8 @@
         command: !!js process.execPath
         args:
           - !!js decodeURIComponent(new URL("node_modules/dsh-rag-evaluate-plugin/launcher.mjs", baseUrl).pathname)
-        toolCallTimeoutMs: 30000
+        # 默认 60000。被测系统的模型加载实测可达 8 秒以上，30 秒对后续工具偏紧。
+        toolCallTimeoutMs: 60000
         failOnStartupError: false
 
     # 把本插件自带的 skill 注册进 skill 注册表。该行名解析到本包的 index.mjs。
