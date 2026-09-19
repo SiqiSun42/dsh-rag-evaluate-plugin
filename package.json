@@ -1,11 +1,17 @@
 {
   "name": "dsh-rag-evaluate-plugin",
   "version": "0.1.0",
+  "description": "DSH 插件：评测工作区中已有的 RAG 检索系统，构建评测集并定位问题层级。",
+  "license": "MIT",
   "type": "module",
   "main": "index.mjs",
-  "bin": {
-    "dsh-rag-evaluate": "./launcher.mjs"
-  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "rag",
+    "evaluation",
+    "retrieval"
+  ],
   "dsh": {
     "bundle": {
       "patch": "./cordis.patch.yml"
@@ -15,8 +21,10 @@
     "index.mjs",
     "launcher.mjs",
     "cordis.patch.yml",
+    "requirements.txt",
     "python",
-    "skills"
+    "skills",
+    "DESIGN.md"
   ],
   "exports": {
     ".": "./index.mjs",
